@@ -19,7 +19,7 @@ export function AdminLoginModal({ open, onOpenChange }: { open: boolean; onOpenC
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await login({ data: { username, password } });
+      const res = await login({ data: { username: username.trim(), password: password.trim() } });
       if (res.ok) {
         toast.success("Bun venit, profesore!");
         onOpenChange(false);
@@ -27,8 +27,8 @@ export function AdminLoginModal({ open, onOpenChange }: { open: boolean; onOpenC
       } else {
         toast.error(res.error ?? "Eroare");
       }
-    } catch {
-      toast.error("Eroare la conectare");
+    } catch (err: any) {
+      toast.error("Eroare: " + (err?.message ?? "necunoscută"));
     } finally {
       setLoading(false);
     }

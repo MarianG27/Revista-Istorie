@@ -2,13 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { useSession } from "@tanstack/react-start/server";
 import { z } from "zod";
 
-const sessionConfig = () => ({
-  password: require("./admin.server").getSessionPassword() as string,
-  name: "rdi_admin",
-  maxAge: 60 * 60 * 8, // 8h
-  cookie: { httpOnly: true, secure: true, sameSite: "lax" as const, path: "/" },
-});
-
 type AdminSession = { loggedIn?: boolean; username?: string };
 
 async function requireAdmin() {

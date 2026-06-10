@@ -12,4 +12,7 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Empty plugins array so Cloudflare's `wrangler deploy` auto-setup detects a valid Vite config.
+  // The Lovable wrapper injects all required plugins internally.
+  plugins: [],
 });
